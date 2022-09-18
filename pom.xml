@@ -34,7 +34,7 @@
             <repository>
               <id>nexus</id>
               <name>Landmark Technologies Releases Nexus Repository</name>
-              <url>http://23.239.11.250:8081/repository/tesla-proxy</url>
+              <url>http://45.79.144.158:8081/repository/tesla-proxy</url>
             </repository>
 
         </repositories>
