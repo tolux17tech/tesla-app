@@ -1,33 +1,52 @@
-node{
-    def mavenHome = tool name: 'maven-3.8.6'
+pipeline {
+    agent any
 
-    stage("1 Cloneclonegit"){
-        git "https://github.com/tolux17tech/tesla-app.git"
+    tools {
+        maven 'maven-3.8.6'
     }
-    stage("2sonarqualitytest"){
-        sh "${mavenHome}/bin/mvn sonar:sonar"
+    stages {
+        stage("Get the code"){
+            steps{
+                sh "echo Cloning the latest application version"
+                git changelog: false, credentialsId: 'Gitlabtech', poll: false, url: 'https://github.com/tolux17tech/tesla-app.git'
+         }                
+       }
+        stage("Buiding and Testing our code"){
+            steps{
+                sh "echo Testing and building"
+                sh "echo testing must move"
+                sh "mvn clean package"
+               }
+           }
+       stage("Testing code with sonarqube"){
+            steps{
+                sh "echo Testing code with sonarqube"
+                sh "mvn sonar:sonar"
+               }
+          }  
+      
+       stage("Upload artifact to nexus"){
+           steps{
+                sh "echo Uploading to nexus"
+                sh "mvn deploy"
+           }
+      }
+      stage("Deploy to container"){
+            steps{
+                sh "echo deploying to tomcat"
+                deploy adapters: [tomcat9(credentialsId: 'tomcatid', path: '', url: 'http://66.175.215.113:8080')], contextPath: null, war: 'target/*.war'
+            }
+      }
+   }
+   post{
+    success{
+        emailext body: 'Build was sucessful', subject: 'Build was successful', to: 'tolux17@gmail.com'
     }
-
-    stage("3Buildtarget"){
-        sh "${mavenHome}/bin/mvn package"
+    failure{
+        emailext body: 'Build was sucessful', subject: 'Build failed', to: 'tolux17@gmail.com'
     }
-    stage("4Upload2nexus"){
-        sh "${mavenHome}/bin/mvn deploy"
+    always{
+        emailext body: 'Build was sucessful', subject: 'Job ran sucesssfully', to: 'tolux17@gmail.com'
     }
-
-    stage("5Deployto2UAT"){
-        sh "echo Deploying to UAT Environment"
-        deploy adapters: [tomcat9(credentialsId: 'tomcatid', path: '', url: 'http://66.175.215.113:8080/')], contextPath: null, war: 'target/*.war'
-    }
-     stage("6ApprovalGate"){
-        sh "echo Waiting for approval gate review before deployment"
-        timeout(5) {
-            input message: "Approval timedout, this will try again later"
-        }
-     }
-     stage("7Deploy2Production"){
-        deploy adapters: [tomcat9(credentialsId: 'tomcatid', path: '', url: 'http://66.175.215.113:8080/')], contextPath: null, war: 'target/*.war'
-     }
-
-    
+   }
 }
