@@ -34,7 +34,7 @@
             <repository>
               <id>nexus</id>
               <name>Landmark Technologies Releases Nexus Repository</name>
-              <url>http://45.79.144.158:8081/repository/tesla-proxy</url>
+              <url>http://162.216.16.243:8081/repository/tesla_proxy/</url>
             </repository>
 
         </repositories>
@@ -109,18 +109,18 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Landmark Technologies Releases Nexus Repository</name>
-	      <url>http://45.79.144.158:8081/repository/tesla-app-release/</url> 
+	      <url>http://162.216.16.243:8081/repository/tesla-release/</url> 
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Landmark Technologies Snapshot Nexus Repository </name>
-	      <url>http://45.79.144.158:8081/repository/tesla-app-snapshot/</url>
+	      <url>http://162.216.16.243:8081/repository/tesla-snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
 	<build>
-		<finalName>Tolux-Build</finalName>
+		<finalName>Tesla-Build</finalName>
 		
 		<plugins>
 			<plugin>
