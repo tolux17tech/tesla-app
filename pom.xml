@@ -16,17 +16,6 @@
 		<url>http://landmarktechnologies.com/</url>
 	</organization>
 
-	<properties>
-		<jdk.version>1.8</jdk.version>
-		<spring.version>5.1.2.RELEASE</spring.version>
-		<junit.version>4.11</junit.version>
-		<log4j.version>1.2.17</log4j.version>
-		<sonar.host.url>http://69.164.222.243:9000/</sonar.host.url>
-		<sonar.login>409609408c1e61ecc553fbad59739e37fc03e3a4</sonar.login>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-	</properties>
 
          
 	 <repositories>
