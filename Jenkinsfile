@@ -17,7 +17,9 @@ pipeline {
     stages {
         stage("init"){
             steps{
-              scip = load "script.groovy"  
+              script{
+                scip = load "script.groovy"
+              }  
          }                
        }
     // stages {
