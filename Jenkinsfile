@@ -29,7 +29,7 @@ pipeline {
     //    }
         stage("Buiding and Testing our code"){
             steps{
-                scip..buildPackage()
+                scip.buildPackage()
                }
            }
        stage("Testing code with sonarqube"){
