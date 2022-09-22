@@ -1,4 +1,4 @@
-def scip
+def gv
 
 pipeline {
     agent any
@@ -17,7 +17,7 @@ pipeline {
     stages {
         stage("init"){
             steps{
-              scip = load "script.groovy"  
+              gv = load "script.groovy"  
          }                
        }
     // stages {
@@ -29,24 +29,24 @@ pipeline {
     //    }
         stage("Buiding and Testing our code"){
             steps{
-                scip.buildPackage()
+                gv.buildPackage()
                }
            }
        stage("Testing code with sonarqube"){
        
             steps{
-                 scip.testWithSonar()
+                 gv.testWithSonar()
                }
           }  
       
        stage("Upload artifact to nexus"){
            steps{
-                scip.deployToNexus()
+                gv.deployToNexus()
            }
       }
       stage("Deploy to container"){
             steps{
-                scip.deploy2Container()
+                gv.deploy2Container()
             }
       }
    }
