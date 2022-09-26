@@ -5,27 +5,28 @@
 	<groupId>com.mt</groupId>
 	<artifactId>maven-web-application</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.9-SNAPSHOT</version>
+	<version>0.0.1</version>
 	
 	<name>visa-web-application</name>
 
 	<description>Maven Web Project for Java Project</description>
-        
+
 	<organization>
 		<name>Landmark Technologies</name>
 		<url>http://landmarktechnologies.com/</url>
 	</organization>
-       <properties>
-		<tomcatPath>/path/to/tomcat/instance</tomcatPath>
+
+	<properties>
 		<jdk.version>1.8</jdk.version>
 		<spring.version>5.1.2.RELEASE</spring.version>
 		<junit.version>4.11</junit.version>
 		<log4j.version>1.2.17</log4j.version>
-		<sonar.host.url>http://69.164.222.243:9000/</sonar.host.url>
-		<sonar.login>409609408c1e61ecc553fbad59739e37fc03e3a4</sonar.login>
+		<sonar.host.url>http://45.79.185.180:9000/</sonar.host.url>
+		<sonar.login>13dece017e0d4d4e449e542de16abbb5dd2a8814</sonar.login>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-      </properties>
+
+	</properties>
 
          
 	 <repositories>
@@ -33,7 +34,7 @@
             <repository>
               <id>nexus</id>
               <name>Landmark Technologies Releases Nexus Repository</name>
-              <url>http://162.216.16.243:8081/repository/tesla_proxy/</url>
+              <url>http://104.237.146.187:8081/repository/tesla-proxy</url>
             </repository>
 
         </repositories>
@@ -108,18 +109,18 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Landmark Technologies Releases Nexus Repository</name>
-	      <url>http://162.216.16.243:8081/repository/tesla-release/</url> 
+	      <url>http://104.237.146.187:8081/repository/tesla-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Landmark Technologies Snapshot Nexus Repository </name>
-	      <url>http://162.216.16.243:8081/repository/tesla-snapshot/</url>
+	      <url>http://104.237.146.187:8081/repository/tesla-snapshots</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
 	<build>
-		<finalName>Tesla-Build</finalName>
+		<finalName>Tolux-Build</finalName>
 		
 		<plugins>
 			<plugin>
@@ -161,4 +162,3 @@
 	
 	
 </project>
-
