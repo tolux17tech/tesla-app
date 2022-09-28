@@ -4,6 +4,9 @@
 library identifier: 'my-library@master', retriever: modernSCM([$class: 'GitSCMSource', credentialsId: '', remote: 'https://gitlab.com/tolux17/my-library.git', traits: [gitBranchDiscovery()]])
 pipeline {
     agent any
+    environment {
+      TOMCAT_URL = "http://66.175.215.113:8080"
+    }
 
     tools{
         maven 'maven'
