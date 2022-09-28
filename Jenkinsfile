@@ -1,4 +1,4 @@
-library identifier: 'Mystery ', retriever: modernSCM([$class: 'GitSCMSource', credentialsId: '', remote: 'https://gitlab.com/tolux17/my-library.git', traits: [gitBranchDiscovery()]])
+library identifier: 'my-library', retriever: modernSCM([$class: 'GitSCMSource', credentialsId: '', remote: 'https://gitlab.com/tolux17/my-library.git'])
 pipeline {
     agent any
 
@@ -10,7 +10,7 @@ pipeline {
         stage ('package') {
             steps {
                 script{
-                    package()
+                   package-app()
                 }
             }
         }
