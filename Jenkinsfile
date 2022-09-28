@@ -20,14 +20,14 @@ pipeline {
         stage ('sonar Testing') {
             steps {
                 script{
-                    sonar()
+                    sonarApp()
                 }
             }
         }
         stage ('Deploy') {
             steps {
                 script{
-                    deploy()
+                    deployApp()
                 }
             }
         }
@@ -42,7 +42,7 @@ pipeline {
         stage ('APPROVAL GATE BEFORE PROD') {
             steps {
                 script{
-                   gate()
+                   gateApp()
                 }
             }
         }
