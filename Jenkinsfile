@@ -51,8 +51,7 @@ pipeline {
        stage ('Deployb to Production') {
             steps {
                 script{
-                    sh "echo deploying to production environment"
-                    deploy adapters: [tomcat9(credentialsId: 'tomcatapp', path: '', url: 'http://66.175.215.113:8080')], contextPath: null, war: 'target/*.war'
+                    deployContainer()
                 }
             }
         } 
