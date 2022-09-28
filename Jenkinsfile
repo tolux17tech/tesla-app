@@ -37,8 +37,7 @@ pipeline {
         stage ('Deploying to UAT') {
             steps {
                 script{
-                    sh "echo deploy to UAT environment"
-                    deploy adapters: [tomcat9(credentialsId: 'tomcatapp', path: '', url: 'http://66.175.215.113:8080')], contextPath: null, war: 'target/*.war'
+                    deployContainer()
                 }
             }
         }
