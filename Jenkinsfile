@@ -10,7 +10,7 @@ pipeline {
         stage ('package') {
             steps {
                 script{
-                   package-app()
+                   package()
                 }
             }
         }
