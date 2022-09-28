@@ -1,9 +1,10 @@
 //library identifier: 'my-library', retriever: modernSCM([$class: 'GitSCMSource', credentialsId: '', remote: 'https://gitlab.com/tolux17/my-library.git', traits: [gitBranchDiscovery()]])
-libraries {
-  lib('my-library')
-}
+
 pipeline {
     agent any
+    libraries {
+    lib('my-library')
+    }
 
     tools{
         maven 'maven'
