@@ -1,6 +1,3 @@
-//library identifier: 'my-library', retriever: modernSCM([$class: 'GitSCMSource', credentialsId: '', remote: 'https://gitlab.com/tolux17/my-library.git', traits: [gitBranchDiscovery()]])
-
-
 library identifier: 'my-library@master', retriever: modernSCM([$class: 'GitSCMSource', credentialsId: '', remote: 'https://gitlab.com/tolux17/my-library.git', traits: [gitBranchDiscovery()]])
 pipeline {
     agent any
@@ -52,6 +49,19 @@ pipeline {
             steps {
                 script{
                     deployContainer()
+                }
+            }
+        }
+
+        stage ('Kubernetes start'){
+            environment {
+                AWS_ACCESS_KEY_ID = credentials('jenkins_aws_access_key_id')
+                AWS_SECRET_ACCESS_KEY = credentials('jenkins_aws_access_secret_access_key')
+            }
+            steps{
+                script{
+                    echo "deploying the docker images on kubernetes"
+                    sh "kubectl create deployment nginx-deployment --image=nginx"
                 }
             }
         } 
