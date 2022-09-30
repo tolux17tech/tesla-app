@@ -1,77 +1,59 @@
-//library identifier: 'Mystery@master ', retriever: modernSCM([$class: 'GitSCMSource', credentialsId: '', remote: 'https://gitlab.com/tolux17/my-library.git', traits: [gitBranchDiscovery()]])
+//library identifier: 'my-library', retriever: modernSCM([$class: 'GitSCMSource', credentialsId: '', remote: 'https://gitlab.com/tolux17/my-library.git', traits: [gitBranchDiscovery()]])
+
 
 library identifier: 'my-library@master', retriever: modernSCM([$class: 'GitSCMSource', credentialsId: '', remote: 'https://gitlab.com/tolux17/my-library.git', traits: [gitBranchDiscovery()]])
 pipeline {
     agent any
+    environment {
+      TOMCAT_URL = "http://66.175.215.113:8080"
+    }
 
     tools{
         maven 'maven'
     }
     stages {
-        stage ('validate') {
-            steps {
-                script{
-                    sh "mvn test"
-                }
-            }
-        }
+       
         stage ('package') {
             steps {
                 script{
-                    sh "mvn package"
+                   packageApp()
                 }
             }
         }
         stage ('sonar Testing') {
             steps {
                 script{
-                    sh "mvn sonar:sonar"
+                    sonarApp()
                 }
             }
         }
         stage ('Deploy') {
             steps {
                 script{
-                    sh "mvn deploy"
+                    deployApp()
                 }
             }
         }
         stage ('Deploying to UAT') {
             steps {
                 script{
-                    sh "echo deploy to UAT environment"
-                    deploy adapters: [tomcat9(credentialsId: 'tomcatapp', path: '', url: 'http://66.175.215.113:8080')], contextPath: null, war: 'target/*.war'
+                    deployContainer()
                 }
             }
         }
         stage ('APPROVAL GATE BEFORE PROD') {
             steps {
                 script{
-                    sh "echo This is the approval gate"{
-                        input id: '34787484', message: 'Please review accept or abort', ok: 'Approve'
-                    }
-                    
-                    timeout(time: 300, unit: 'SECONDS') {
-                          // some block
-                    }
+                   gateApp()
                 }
             }
         }
        stage ('Deployb to Production') {
             steps {
                 script{
-                    sh "echo deploying to production environment"
-                    deploy adapters: [tomcat9(credentialsId: 'tomcatapp', path: '', url: 'http://66.175.215.113:8080')], contextPath: null, war: 'target/*.war'
+                    deployContainer()
                 }
             }
-        }
-        stage ('Kubernetes start'){
-            steps{
-                script{
-                    echo "deploying the docker images on kubernetes"
-                    sh "kubectl create deployment nginx-deployment --image=nginx"
-                }
-            }
-        }  
+        } 
     }
 }
